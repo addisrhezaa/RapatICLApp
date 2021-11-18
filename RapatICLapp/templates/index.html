@@ -115,16 +115,6 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
-                        <form method='POST'>
-                            {% crsf_token %}
-                            <table>
-                                {{post_rapat.as_table}}
-                                {{post_notulensi.as_table}}
-                                {{post_absensi.as_table}}
-                            </table>
-
-                            <button type="Submit">Kirim</button>
-                        </form>
                         <!-- <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
@@ -194,6 +184,7 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>NIM</th>
+                                            <th>Total Hadir</th>
                                             <th>Total Rapat</th>
                                         </tr>
                                     </thead>
@@ -201,60 +192,20 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>NIM</th>
+                                            <th>Total Hadir</th>
                                             <th>Total Rapat</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        {% for asisten_item in nama %}
                                         <tr>
-                                            <td>Addis Rheza Firmansyah</td>
-                                            <td>205060700111007</td>
-                                            <td>San Francisco</td>
+                                            <td>{{asisten_item.nama}}</td>
+                                            <td>{{asisten_item.nim}}</td>
+                                            <td>{{asisten_item.total_hadir}}</td>
+                                            <td>{{total_rapat}}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Indana Alya Pratiwi</td>
-                                            <td>205060700111031</td>
-                                            <td>San Francisco</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Try Putra Amirul Mu'minin</td>
-                                            <td>205060701111009</td>
-                                            <td>San Francisco</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tiara Anindityantary</td>
-                                            <td>205060700111004</td>
-                                            <td>Edinburgh</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Maulana Ahmad Fahreza</td>
-                                            <td>205060700111024</td>
-                                            <td>Tokyo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fallah Amalia</td>
-                                            <td>205060700111023</td>
-                                            <td>New York</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Indico Putri Cahyaning Atie</td>
-                                            <td>205060701111006</td>
-                                            <td>San Francisco</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dhira Rari Pratita</td>
-                                            <td>205060700111011</td>
-                                            <td>Tokyo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mas Arief Wiranegara</td>
-                                            <td>205060707111006</td>
-                                            <td>San Francisco</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sabrina Putri Aryanti</td>
-                                            <td>205060700111026</td>
-                                            <td>Edinburgh</td>
-                                        </tr>
+                                        {% endfor %}
+
                                     </tbody>
                                 </table>
                             </div>

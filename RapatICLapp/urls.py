@@ -2,7 +2,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('api', views.homepage, views.create),
+    path('api', views.homepage),
     path('api/rapat', views.rapat_list.as_view()),
     path('api/absen', views.absensi_list.as_view()),
     path('api/asisten', views.asisten_list.as_view()),

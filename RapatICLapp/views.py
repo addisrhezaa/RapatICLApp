@@ -17,37 +17,21 @@ from RapatICLapp.serializers import (AsistenSerializer,
 
 # Create your views here.
 def homepage(request):
-    return render(request,'index.html')
+    asisten = Asisten.objects.all()
+    listtotal = []
+    for item in asisten:
+        temp = {}
+        nim = item.nim
+        temp['nim'] = item.nim
+        temp['nama'] = item.nama
+        total_hadir = len(Absensi.objects.filter(asisten__nim=nim).filter(hadir = True))
+        temp['total_hadir'] = total_hadir
+        listtotal.append(temp)
+    total_rapat = len(Rapat.objects.all())
+    data = {'nama' : listtotal, 'total_rapat': total_rapat}
+    print(asisten)
+    return render(request,'index.html',data)
 
-def create(request):
-    post_rapat = PostRapat(request.POST or None)
-    post_notulensi = PostNotulensi(request.POST or None)
-    post_absensi = PostAbsensi(request.POST or None)
-
-    if request.method == 'POST':
-        if post_rapat.is_valid():
-            post_rapat.save()
-
-            return redirect('templates:index')
-        
-        if post_notulensi.is_valid():
-            post_notulensi.save()
-
-            return redirect('templates:index')
-        
-        if post_absensi.is_valid():
-            post_absensi.save()
-
-            return redirect('templates:index')
-
-    context = {
-        'post_rapat':post_rapat,
-        'post_notulensi':post_notulensi,
-        'post_absensi':post_absensi,
-    }
-
-    return render(request,'index.html',context)
-    
 class asisten_list(APIView):
     def get(self, request):
         asisten = Asisten.objects.all()
